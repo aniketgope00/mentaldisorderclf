@@ -1,75 +1,8 @@
-import pandas as pd
-import pickle
-from flask import Flask, render_template, request, redirect, url_for
-
-app = Flask(__name__)
-
-options = {
-    "Sadness": ['Usually', 'Sometimes', 'Seldom', 'Most-Often'],
-    "Euphoric": ['Seldom', 'Most-Often', 'Usually', 'Sometimes'],
-    "Exhausted": ['Sometimes', 'Usually', 'Seldom', 'Most-Often'],
-    "Sleep Dissorder": ['Sometimes', 'Most-Often', 'Usually', 'Seldom'],
-    "Mood Swing": ['YES', 'NO'],
-    "Suicidal thoughts": ['YES', 'NO'],
-    "Anorxia": ['NO', 'YES'],
-    "Authority Respect": ['NO', 'YES'],
-    "Try-Explanation": ['YES', 'NO'],
-    "Aggressive Response": ['NO', 'YES'],
-    "Ignore & Move-On": ['NO', 'YES'],
-    "Nervous Break-down": ['YES', 'NO'],
-    "Admit Mistakes": ['YES', 'NO'],
-    "Overthinking": ['YES', 'NO'],
-    "Sexual Activity": ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-    "Concentration": ['1', '2', '3', '4', '5', '6', '7', '8'],
-    "Optimism": ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-}
-
-@app.route('/', methods=['GET'])
-def home():
-    return render_template('options.html', options=options)
-
-@app.route('/output', methods=['POST'])
-def output():
-    if request.method == 'POST':
-        form_data = {key: request.form[key] for key in request.form}
-
-        print("form data:", form_data)
-        print("no. of keys in form data:", len(list(form_data.keys())))
-
-        ordinal_f = ["Sadness", "Euphoric", "Exhausted", "Sleep dissorder"]
-        binary_f = ["Mood Swing", "Suicidal thoughts", "Anorxia", "Authority Respect", "Try-Explanation", "Aggressive Response", "Ignore & Move-On", "Nervous Break-down", "Admit Mistakes", "Overthinking"]
-
-        ordinal_mapping = {'Seldom':1, 'Sometimes':2, 'Usually':3, 'Most-Often':4}
-        binary_mapping = {'NO':0, 'YES':1}
-        
-        form_data_encoded = {}
-
-        for key, value in request.form.items():
-            if key in ordinal_f:
-                form_data_encoded[key] = ordinal_mapping[value]
-            
-        for key, value in request.form.items():
-            if key in binary_f:
-                form_data_encoded[key] = binary_mapping[value]
-            
-        print("form data encoded:", form_data_encoded)
-
-
-        responses = []
-        for key in form_data_encoded.keys():
-            responses.append(form_data_encoded[key])
-        input = pd.Series(responses)
-        input_values = input.values.reshape(-1, 1)
-
-        print(input_values)
-
-        output_mapping = {0: 'Bipolar Type-1', 1: 'Bipolar Type-2', 2: 'Depression', 3: 'Normal'}
-
-        model = pickle.load(open('model.pkl','rb'))
-        pred = model.predict(input_values)
-        
-        print(form_data)
-        return render_template('output.html', form_data=form_data, result = output_mapping[pred])
-
-if __name__ == '__main__':
-    app.run(debug=True)
+Python 3.10.8
+Flask 3.0.0
+Werkzeug 3.0.1
+pandas 2.2.0
+numpy 1.26.2
+matplotlib 3.8.4
+seaborn 0.13.2
+scikit-learn 1.4.2
