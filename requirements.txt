@@ -1,8 +1,8 @@
-Python 3.10.8
-Flask 3.0.0
-Werkzeug 3.0.1
-pandas 2.2.0
-numpy 1.26.2
-matplotlib 3.8.4
-seaborn 0.13.2
-scikit-learn 1.4.2
+Python
+Flask
+Werkzeug
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
