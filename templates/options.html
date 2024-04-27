@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="text-center">
+    <h4>Select Responses</h4>
+</div>
+
+<div class="container p-4"> <!-- Add padding classes here -->
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center border border-secondary rounded p-4"> <!-- Add border, border-primary, rounded, and padding classes here -->
+            <form action="/output" method="post">
+                {% for key, values in options.items() %}
+                <div class="form-group mb-0"> <!-- Add mb-0 to remove bottom margin -->
+                    <label for="{{ key }}"><b>{{ key }}:</b></label>
+                    <select class="form-control" id="{{ key }}" name="{{ key }}">
+                        {% for value in values %}
+                        <option value="{{ value }}" style="text-align: center;">{{ value }}</option>
+                        {% endfor %}
+                    </select>   
+                </div>
+                <br>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary btn-lg btn-block mt-3">Submit</button> <!-- Add mt-3 to add top margin -->
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
