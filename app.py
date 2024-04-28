@@ -5,13 +5,13 @@ from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 
 options = {
-    "Sadness": ['Usually', 'Sometimes', 'Seldom', 'Most-Often'],
-    "Euphoric": ['Seldom', 'Most-Often', 'Usually', 'Sometimes'],
-    "Exhausted": ['Sometimes', 'Usually', 'Seldom', 'Most-Often'],
-    "Sleep dissorder": ['Sometimes', 'Most-Often', 'Usually', 'Seldom'],
+    "How often do you feel sad?": ['Usually', 'Sometimes', 'Seldom', 'Most-Often'],
+    "How often do you feel euphoric?": ['Seldom', 'Most-Often', 'Usually', 'Sometimes'],
+    "How often do you feel exhausted?": ['Sometimes', 'Usually', 'Seldom', 'Most-Often'],
+    "How often do you have difficulty in sleeping?": ['Sometimes', 'Most-Often', 'Usually', 'Seldom'],
     "Mood Swing": ['YES', 'NO'],
     "Suicidal thoughts": ['YES', 'NO'],
-    "Anorxia": ['NO', 'YES'],
+    "Anorexia": ['NO', 'YES'],
     "Authority Respect": ['NO', 'YES'],
     "Try-Explanation": ['YES', 'NO'],
     "Aggressive Response": ['NO', 'YES'],
